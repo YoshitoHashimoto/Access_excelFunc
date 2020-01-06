@@ -1,0 +1,10 @@
+Sub aiueo()
+
+Dim A As xlFunc
+Set A = New xlFunc
+A.xlCreate ("d.xlsx")
+
+DoCmd.TransferSpreadsheet acExport, acSpreadsheetTypeExcel12Xml, "abc", A.savedName, 1
+
+
+End Sub
