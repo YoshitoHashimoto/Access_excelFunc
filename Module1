@@ -1,10 +1,19 @@
 Sub aiueo()
+Dim path
+    path = Application.CurrentProject.path & "\d.xlsx"
+Dim a As xlFunc
+Set a = New xlFunc
+Call a.xlCreate(path, "Form")
+DoCmd.TransferSpreadsheet acExport, acSpreadsheetTypeExcel12Xml, "test", path, 1
+DoCmd.TransferSpreadsheet acExport, acSpreadsheetTypeExcel12Xml, "テスト", path, 1
 
-Dim A As xlFunc
-Set A = New xlFunc
-A.xlCreate ("d.xlsx")
 
-DoCmd.TransferSpreadsheet acExport, acSpreadsheetTypeExcel12Xml, "abc", A.savedName, 1
+Set a = Nothing
+
+End Sub
 
 
+Sub dummySQL()
+DoCmd.RunSQL "create table test(列1 INT , 列2 TEXT(20) )"
+DoCmd.RunSQL "create table テスト(列1 INT , 列2 TEXT(20) )"
 End Sub
