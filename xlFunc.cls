@@ -1,8 +1,26 @@
 Option Compare Database
+Option Explicit
 
-Public savedName As String
+
+Public Sub xlsheetInsert(ByVal fName As String, ByVal sheetName As String)
+Dim xlObj As Object, xlBook As Object 'workbook型は、Excel Libraryの参照が必要となるため、Objectで宣言
+
+    Set xlObj = CreateObject("Excel.Application")
+    Set xlBook = xlObj.Workbooks
+    xlBook.Open fName
+    xlObj.Worksheets.Add
+    xlObj.ActiveSheet.Name = sheetName
+    xlObj.ActiveWorkbook.Close SaveChanges:=True
+
+Set xlBook = Nothing
+Set xlObj = Nothing
+
+End Sub
+
 
 Public Sub xlCreate(ByVal fName As String, ByVal sheetName As String)
+Dim xlObj As Object, xlBook As Object 'workbook型は、Excel Libraryの参照が必要となるため、Objectで宣言
+
 
 If strCheck(fName, ".xlsx", 5, True) Then
     '処理を続行する
@@ -12,22 +30,16 @@ Else
     End
 End If
 
-
-Dim xlObj As Object, xlBook As Object 'workbook型は、Excel Libraryの参照が必要となるため、Objectで宣言
-Dim path As String
-
-    path = Application.CurrentProject.path & "\"
-    fName = path & fName
     
     Set xlObj = CreateObject("Excel.Application")
     Set xlBook = xlObj.Workbooks.Add
+        xlBook.Sheets(1).Name = sheetName
         xlBook.SaveAs (fName)
-        savedName = fName
         xlBook.Close
 
-
-Set xlObj = Nothing
 Set xlBook = Nothing
+Set xlObj = Nothing
+
 
 
 End Sub
