@@ -66,3 +66,16 @@ Else
 End If
 
 End Function
+
+
+Public Property Get Name()
+    Name = "xlFunc"
+End Property
+
+Private Sub Class_Initialize()
+    Debug.Print Now & vbTab & Me.Name & "はコンストラクトされました。"
+End Sub
+
+Private Sub Class_Terminate()
+    Debug.Print Now & vbTab & Me.Name & "はデトラクトされました。"
+End Sub
